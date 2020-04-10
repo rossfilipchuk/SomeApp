@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SomeApp</string>
+
+    <string name="article_author_parameter">Author:%s</string>
+    <string name="article_date_parameter">Publish Date:%s</string>
+
+    <string name="snackbar_delete_message">Article will be deleted</string>
+    <string name="snackbar_save_message">Article will be saved</string>
+</resources>

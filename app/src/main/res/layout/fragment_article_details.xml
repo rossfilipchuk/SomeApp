@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.someapp.presentation.details.ArticleDetailsViewModel" />
+
+        <variable
+            name="clickHandler"
+            type="com.someapp.presentation.details.FabButtonClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/ivArticleImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/btn_star_big_on"
+                app:bindImageUrl="@{vm.article.urlToImage}"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPublishAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.format(@string/article_author_parameter, vm.article.author)}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:text="Author: The Freedonia Cooperative" />
+
+            <TextView
+                android:id="@+id/tvPublishDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{String.format(@string/article_date_parameter, vm.article.publishedAt)}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@id/tvPublishAuthor"
+                app:layout_constraintTop_toBottomOf="@id/tvPublishAuthor"
+                tools:text="2019-05-24T17:31:09Z" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@{vm.article.title}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@id/tvPublishDate"
+                app:layout_constraintTop_toBottomOf="@id/ivArticleImage"
+                tools:text="NANO, started as Raiblocks, is up over 85% in USD value in 2019. The coin is attempting to be the fastest, lowest cost blockchain currency on the market and has" />
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@{vm.article.content}"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvPublishDate"
+                tools:text="NANO, started as Raiblocks, is up over 85% in USD value in 2019. The coin is attempting to be the fastest, lowest cost blockchain currency on the market and has" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:onClick="@{()-> clickHandler.onFabButtonClick()}"
+            android:src="@{vm.isArticleSaved ? @drawable/ic_delete : @drawable/ic_save }" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
