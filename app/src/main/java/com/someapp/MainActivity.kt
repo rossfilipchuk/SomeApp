@@ -19,14 +19,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment())
             .commit()
-
-
-        runBlocking {
-            val nums = (1..3).asFlow()
-            val str = flowOf("one", "two")
-            nums.combine(str) { a, b -> "$a -> $b" }
-                .collect { println(it)}
-
-        }
     }
 }
